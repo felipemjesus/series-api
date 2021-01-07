@@ -23,7 +23,7 @@ class SeriesController extends Controller
     {
         $serie = Serie::find($id);
         if (!$serie) {
-            return response()->json($serie, 404);
+            return response()->json([], 404);
         }
 
         return response()->json($serie);
@@ -33,12 +33,21 @@ class SeriesController extends Controller
     {
         $serie = Serie::find($id);
         if (!$serie) {
-            return response()->json($serie, 404);
+            return response()->json([], 404);
         }
 
         $serie->fill($request->all());
         $serie->save();
 
         return response()->json($serie);
+    }
+
+    public function destroy(int $id)
+    {
+        if (Serie::destroy($id) === 0) {
+            return response()->json([], 404);
+        }
+
+        return response()->json([]);
     }
 }
