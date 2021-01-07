@@ -8,9 +8,9 @@ abstract class DefaultController extends Controller
 {
     protected string $model;
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->model::all();
+        return $this->model::paginate($request->per_page);
     }
 
     public function store(Request $request)
