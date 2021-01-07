@@ -18,4 +18,14 @@ class SeriesController extends Controller
 
         return response()->json($serie, 201);
     }
+
+    public function show(int $id)
+    {
+        $serie = Serie::find($id);
+        if (!$serie) {
+            return response()->json($serie, 404);
+        }
+
+        return response()->json($serie);
+    }
 }
