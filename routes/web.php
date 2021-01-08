@@ -2,11 +2,15 @@
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->get('/', function () {
+    return redirect('/api');
 });
 
 $router->group(['prefix' => 'api'], function () use ($router) {
+
+    $router->get('/', function () {
+        return env('APP_NAME') . ' v' . file_get_contents(__DIR__ . '/../VERSION');
+    });
 
     $router->post('login', ['uses' => 'UsersController@login']);
 
